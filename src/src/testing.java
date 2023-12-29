@@ -90,7 +90,7 @@ public class testing {
 
     }
 
-        int binarySearch(int[] a,int low,int high,int val){
+    int binarySearch(int[] a,int low,int high,int val){
             int n=a.length;
             int res = -1;
             while(low<=high){

@@ -1,11 +1,11 @@
 package src;
 
 public class Test {
-    public static void main(String[] args) {
+    public void main(String[] args) {
        // String s = "is2 sentence4 This1 a3";
        // test(s);
 
-        String s1 = "Sneha";
+       /* String s1 = "Sneha";
         String s2 = new String("Sneha");
         String s3 = "Sneha";
         String s4 = new String("Sneha");
@@ -15,7 +15,30 @@ public class Test {
         if(s1==s3)
             System.out.println("s1==s3");
         if(s4==s2)
-            System.out.println("s4==s2");
+            System.out.println("s4==s2");*/
+
+
+    }
+
+    private int maxSubarraySum(int[] n) {
+
+        int sum = 0;
+        int prev = 0;
+        int j = 0;
+        int i = 0;
+        while(j < n.length){
+            prev = sum;
+            sum = sum + n[j];
+            j++;
+            if(prev > sum) {
+                sum = sum - n[i];
+                i++;
+                j++;
+            }else if(prev < sum)
+                j++;
+
+        }return sum;
+
 
     }
 
