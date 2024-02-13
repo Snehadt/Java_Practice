@@ -27,10 +27,99 @@ public class Practice {
 
         //count the no of subset with given diff
         //Target sum = assign signs(+ or -) before every number so that the given diff is achieved
-        int[] arr = {1,1,2,3};
+       /* int[] arr = {1,1,2,3};
         int diff = 1;
-        System.out.println(NuOfSubsetWithGivebDiff(arr,diff));
+        System.out.println(NuOfSubsetWithGivebDiff(arr,diff));*/
+
+        //fibonacci series
+        int n = 9;
+      //  System.out.println("test result :"+fibonnacciseries(n));
+
+        //lcs
+        String s1 = "AGGTAB";
+        String s2 = "GXTXAYB";
+        int l1 = s1.length();
+        int l2 = s2.length();
+        //lcs(s1,s2,l1,l2);
+
+//min no of coins
+        int coin[] = {25, 10,5};
+        int sum = 30;
+        System.out.println("min coin:"+minNoofCoins(coin,sum));
     }
+
+    private static int minNoofCoins(int[] coin, int sum) {
+        int size = coin.length;
+        if(size == 0 || sum == 0)
+            return 0;
+        int t[][] = new int[size+1][sum+1];
+        for(int i =0 ; i< sum+1 ; i++)
+            t[0][i] = Integer.MAX_VALUE-1;
+        for(int i = 0 ;i < size+1 ; i++)
+           t[i][0] = 0;
+        for(int i = 1 ; i < sum+1 ; i++){
+            if(i%coin[0] ==0)
+                t[1][i] = i/coin[0];
+            else
+                t[1][i] = Integer.MAX_VALUE-1;
+        } for(int i = 2; i < size+1; i++){
+            for(int j = 1 ; j < sum+1 ; j++){
+                if(coin[i-1] <=j)
+                    t[i][j] = Math.min(1+t[i][j-coin[i-1]],t[i-1][j]);
+                else
+                    t[i][j] = t[i-1][j];
+            }
+        }
+        return t[size][sum];
+    }
+
+   /* private static int lcs(String s1, String s2, int l1, int l2) {
+        int s = 0;
+        if(l1 == 0 || l2 == 0)
+            return 0;
+        int t[][] = new int[l1+1][l2+1];
+
+        for(int[] row : t)
+            Arrays.fill(row,-1);
+
+
+                if(s1.charAt(l1-1)==s2.charAt(l2-1))
+                    t[][] = s+s1.charAt(l1-1);
+                else
+                    s=s+ Math.max(lcs(s1,s2,l1-1,l2),lcs(s1,s2,l1,l2-1));
+
+        return s;
+    }
+        }
+        return s1;
+    }   */
+
+ /*   private static int fibonnacciseries(int n) {
+        int t[][] = new int[n+1][n+1];
+
+        *//*for(int[] row:t)
+            Arrays.fill(row,-1);*//*
+
+         fibonnacciseries[0] = 0;
+        int fibonnacciseries[1] = 1;
+        int t[][] = new int[n+1][n+1];
+
+        *//*for(int[] row : t)
+            Arrays.fill(t,-1);*//*
+        int s = 0;
+        if(n == 0)
+            return a;
+        if(n==1)
+            return b;
+        for(int i =2 ; i <n ;i++) {
+            for (int j = 2; j < n; j++)
+
+                t[i][j] =
+            fibonnacciseries(n - 1) + fibonnacciseries(n - 2);
+        }
+
+        return t[n][n];
+    }*/
 
     private static int NuOfSubsetWithGivebDiff(int[] arr, int diff) {
         int sum = 0;

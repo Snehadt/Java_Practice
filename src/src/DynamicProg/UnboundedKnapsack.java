@@ -31,6 +31,7 @@ public class UnboundedKnapsack {
             t[j][0] = 0;
 
         for(int i = 1 ; i < sum+1 ; i++){
+
                 if(i%coin[0]==0)
                     t[1][i] = i/coin[0];
                 else
