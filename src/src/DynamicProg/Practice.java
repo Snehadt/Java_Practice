@@ -1,5 +1,7 @@
 package src.DynamicProg;
 
+import java.util.Arrays;
+
 public class Practice {
     public static void main(String[] args) {
         //subset sum problem
@@ -36,16 +38,137 @@ public class Practice {
       //  System.out.println("test result :"+fibonnacciseries(n));
 
         //lcs
-        String s1 = "AGGTAB";
-        String s2 = "GXTXAYB";
+       /* String s1 = "AGGTAB";
+        String s2 = "GXTXAYB";*/
+        String s1 = "Sneehaaaa";
+        String s2 = "Snehaaaa";
+
         int l1 = s1.length();
         int l2 = s2.length();
         //lcs(s1,s2,l1,l2);
+      //  System.out.println("lcs new :"+  lcs1(s1,s2,l1,l2));
+
+       // fibonacci series
+        n = 10;
+        System.out.println(fibon(n));
 
 //min no of coins
         int coin[] = {25, 10,5};
         int sum = 30;
-        System.out.println("min coin:"+minNoofCoins(coin,sum));
+      //  System.out.println("min coin:"+minNoofCoins(coin,sum));
+
+       /* String s = "nitik";
+        int i = 0;
+        int j = s.length()-1;
+        System.out.println("pallindrome +"+pallindromepartition(s,i,j));*/
+
+
+        for(int i = 2 ;  i <= 100 ; i++) {
+            if (printPrime(i, 2) == 0) ;
+            System.out.println(i);
+        }
+    }
+
+    private static int printPrime(int i,int x) {
+        if(i == x)
+            return 0;
+        if(i%x == 0)
+            return 1;
+        else
+            return printPrime(i,i+1);
+    }
+
+    private static int pallindromepartition(String s, int i , int j) {
+        if ( i > j)
+            return 0;
+        if( i == j)
+            return 1;
+
+        if(isPallindrome(s))
+            return 1;
+        int t[][] = new int[s.length()+1][s.length()+1];
+        for(int[] row : t)
+            Arrays.fill(row,-1);
+        int minv = Integer.MAX_VALUE;
+        for(int k = i ; k <j ; k++) {
+            int temp = pallindromepartition(s, i, k) + pallindromepartition(s, k + 1, j)+1;
+            if(minv > temp)
+                minv = temp;
+        }
+        return minv;
+    }
+
+    private static boolean isPallindrome(String s) {
+        int i = 0 ;
+        int j = s.length() -1;
+
+        while(i <=j){
+            if(s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
+            }else{
+                return false;
+            }
+        }return true;
+    }
+
+    private static int fibon(int n) {
+       if(n <= 1)
+           return n;
+// 0 1 2 3 5 8 13 21 34 55
+
+        int t[] = new int[n+2];
+        t[0] = 0;
+        t[1] = 1;
+        for(int i = 2 ; i <= n ; i++)
+        t[i] = t[i-1]+t[i-2];
+        return t[n];
+
+    }
+
+    private static Object lcs1(String s1, String s2, int l1, int l2) {
+        if(l1 == 0 || l2 == 0)
+            return 0;
+        int t[][] = new int[l1+1][l2+1];
+
+        for(int i = 0 ; i < l1+1 ; i++)
+            t[i][0] = 0;
+        for(int i = 0 ; i < l2+1 ; i++)
+            t[0][i] = 0;
+        int max_ln = Integer.MIN_VALUE;
+        int end = 0;
+        for(int i = 1 ; i < l1+1 ; i++) {
+            for (int j = 1; j < l2 + 1; j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    t[i][j] = 1 + t[i - 1][j - 1];
+                    if(t[i][j] > max_ln) {
+                        max_ln = t[i][j];
+                        end = i - 1;
+                    }
+
+                }
+                else
+                  //  t[i][j] = Math.max(t[i - 1][j], t[i][j - 1]);
+                t[i][j] =0;
+            }
+        }
+
+      /*  int m = l1;
+        int n = l2;
+        String s = "";
+        while(m > 0 && n > 0){
+            if(s1.charAt(m-1)==s2.charAt(n-1)){
+                s = s1.charAt(m-1)+s;
+            m--;
+            n--;}
+            else
+                if(t[m-1][n] > t[m][n-1])
+                    m--;
+                else
+                    n--;
+
+        }*/
+        return s1.substring(end-max_ln,max_ln);
     }
 
     private static int minNoofCoins(int[] coin, int sum) {
