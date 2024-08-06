@@ -49,7 +49,77 @@ public class Print1toN {
 
         String z = "abc";
         String ans ="";
-        permutationOfAllString(z,ans);
+       // permutationOfAllString(z,ans);
+
+        int[] arr1= {2,7,11,15,-2};
+        int sum = 9;
+       // sumOf2num(arr1,sum);
+
+        int[] kt = {1,2,2,3,4,4,5,5};
+       // removeDup(kt);
+
+        int m[] = {1,2,3,4,5,6,7};
+        int kq = 3;
+       // rotateRight(m,kq);
+        rotateLeft(m,kq);
+    }
+
+    private static void rotateLeft(int[] m, int kq) {
+        int n = m.length;
+        kq=kq%n;
+
+        for(int i = 0 ; i < n ; i++){
+            if(i < kq)
+                System.out.println(m[kq-1-i]);
+            else
+                System.out.println(m[n-i]);
+        }
+    }
+
+    private static void rotateRight(int[] m, int kq) {
+        int n = m.length;
+        kq = kq%n;
+
+        for(int i = 0 ; i < n ; i++){
+            if(i < kq)
+                System.out.println(m[n+i-kq]);
+            else
+                System.out.println(m[i-kq]);
+        }
+    }
+
+    private static void removeDup(int[] k) {
+     /* Set<Integer> set = new HashSet<>();
+
+      for(int s : k){
+          if(!set.contains(s))
+              set.add(s);
+      }for(int i : set){
+            System.out.println(i);
+        }*/
+
+        int j = 0;
+        for(int i = 0 ; i < k.length-1 ; i++){
+            if(k[i] != k[i+1])
+                k[j++]=k[i];
+        }
+        k[j++]=k[k.length-1];
+
+        for(int i = 0 ; i<j ; i++)
+            System.out.println(k[i]);
+    }
+
+    private static void sumOf2num(int[] arr, int sum) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int k : arr){
+            int temp = sum - k;
+            if(set.contains(temp)) {
+                System.out.println("" + k + " " + temp);
+              //  return;
+            }
+            set.add(k);
+        }
     }
 
     private static void permutationOfAllString(String z,String ans) {
